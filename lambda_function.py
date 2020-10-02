@@ -62,7 +62,8 @@ def lambda_handler(event, context):
     mediaFileS3Key = 'ccc/media/ccc-{:03d}-{}.mp3'.format(int(episodeNum), pubDate)
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.generate_presigned_post(bucket, mediaFileS3Key, ExpiresIn=300)
+        response = s3_client.generate_presigned_post(bucket, mediaFileS3Key, 
+            Fields = {"Content-Type": "audio/mpeg"}, Conditions = [{"Content-Type": "audio/mpeg"}], ExpiresIn=300)
     except ClientError as e:
         logging.error(e)
         return {
