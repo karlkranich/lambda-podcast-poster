@@ -63,7 +63,7 @@ def lambda_handler(event, context):
     s3_client = boto3.client('s3')
     try:
         response = s3_client.generate_presigned_post(bucket, mediaFileS3Key, 
-            Fields = {"Content-Type": "audio/mpeg"}, Conditions = [{"Content-Type": "audio/mpeg"}], ExpiresIn=300)
+            Fields = {"Content-Type": "audio/mp3"}, Conditions = [{"Content-Type": "audio/mp3"}], ExpiresIn=300)
     except ClientError as e:
         logging.error(e)
         return {
